@@ -15,11 +15,20 @@ try:
     
     cursor = db.cursor()
 
+    player_data = ("Smeagol", "Shire Folk", 1)
+
+    add_player = ("INSERT INTO player(first_name, last_name, team_id)"
+                 "VALUES(%s, %s, %s)")
+
     query= "SELECT player_id, first_name, last_name, team_name FROM player INNER JOIN team ON player.team_id = team.team_id"
     
-    cursor.execute(query)
-    rows=cursor.fetchall()
+    cursor.execute(add_player, player_data)
     
+    #cursor.execute(query)
+    #rows=cursor.fetchall()
+    
+    db.commit()
+
     print("\n-- DISPLAYING PLAYER RECORDS --")
     for x in rows:
         print("Player ID: {}".format(x[0]))
